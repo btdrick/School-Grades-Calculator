@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * This class tests the functionality of
- * CompositeGrade constructor.
+ * {@link CompositeGrade} constructor.
  * 
  * @author Brandon Drick
  * @version 11/07/2021
