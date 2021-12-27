@@ -23,7 +23,7 @@ public class TestCompositeGradeConstructor {
 	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void tesCannotCreateCompositeGradeWithNullStrategy() {
+	public void testCannotCreateCompositeGradeWithNullStrategy() {
 		assertThrows(IllegalArgumentException.class, () -> {
 			new CompositeGrade(null);
 		});
@@ -34,7 +34,7 @@ public class TestCompositeGradeConstructor {
 	 * created with empty list
 	 */
 	@Test
-	public void shouldHaveNoGradesWhenCreated() {
+	public void testShouldHaveNoGradesWhenCreated() {
 		this.compositeGrade = new CompositeGrade(mock(GradeStrategy.class));
 		assertTrue(this.compositeGrade.getGrades().isEmpty());
 	}

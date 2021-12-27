@@ -11,23 +11,23 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests the functionality of
- * {@link SumOfGradesStrategy#calculateGrade(ArrayList) calculateGrade} method.
+ * Tests the functionality of the
+ * {@link AverageOfGradesStrategy#calculateGrade(ArrayList) calculateGrade} method.
  * 
  * @author Brandon Drick
  * @version 12/27/2021
  */
-public class TestSumOfGradesStrategyCalculate {
+public class TestAverageOfGradesStrategyCalculate {
 
 	private static final double DELTA = 0.001;
 	private Grade mockGrade0;
 	private Grade mockGrade1;
 	private Grade mockGrade2;
 	private ArrayList<Grade> grades;
-	private SumOfGradesStrategy strategy;
+	private AverageOfGradesStrategy strategy;
 	
 	/**
-	 * Set up the objects used for testing
+	 * Sets up the objects used for testing.
 	 * 
 	 * @throws Exception
 	 */
@@ -41,47 +41,47 @@ public class TestSumOfGradesStrategyCalculate {
 		when(this.mockGrade2.getValue()).thenReturn(30.00);
 		
 		this.grades = new ArrayList<Grade>();
-		
-		this.strategy = new SumOfGradesStrategy();
+		this.strategy = new AverageOfGradesStrategy();
 	}
 	
 	/**
-	 * Test cannot calculate with empty list.
+	 * Test cannot calculate null Grade list.
+	 * 
+	 * @throws IllegalArgumentException
 	 */
 	@Test
 	public void testShouldNotAllowNullGradesList() {
-		assertThrows(IllegalArgumentException.class, () -> { 
+		assertThrows(IllegalArgumentException.class, () -> {
 			this.strategy.calculateGrade(null);
 		});
 	}
 	
 	/**
-	 * Test return 0 from empty list.
+	 * Test return 0 for empty list.
 	 */
 	@Test
-	public void testShouldGiveZeroIfNoGrades() {
+	public void testShouldReturn0IfNoGrades() {
 		assertEquals(0, this.strategy.calculateGrade(this.grades), DELTA);
 	}
 	
 	/**
-	 * Test that the value of one-element list
-	 * is returned.
+	 * Test returns value of one-element list.
 	 */
 	@Test
-	public void testShouldCalculateSumOfOneGrades() {
+	public void testShouldCalculateAverageOfOneGrades() {
 		this.grades.add(this.mockGrade0);
 		assertEquals(this.mockGrade0.getValue(), this.strategy.calculateGrade(this.grades), DELTA);
 	}
 
 	/**
-	 * Test that list of multiple elements
-	 * returns the sum.
+	 * Test returns the average of list
+	 * of Grade elements.
 	 */
 	@Test
 	public void testShouldCalculateSumOManyGrades() {
 		this.grades.add(this.mockGrade0);
 		this.grades.add(this.mockGrade1);
 		this.grades.add(this.mockGrade2);
-		assertEquals(60, this.strategy.calculateGrade(this.grades), DELTA);
+		assertEquals(20, this.strategy.calculateGrade(this.grades), DELTA);
 	}
 }

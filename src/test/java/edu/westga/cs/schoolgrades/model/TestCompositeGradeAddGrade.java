@@ -25,9 +25,11 @@ public class TestCompositeGradeAddGrade {
 	
 	/**
 	 * Sets up the objects used in testing
+	 * 
+	 * @throws Exception
 	 */
 	@BeforeEach
-	public void setup() {
+	public void setup() throws Exception {
 		this.composite = new CompositeGrade(mock(GradeStrategy.class));
 		this.mockGrade0 = mock(Grade.class);
 		when(this.mockGrade0.getValue()).thenReturn(10.00);
