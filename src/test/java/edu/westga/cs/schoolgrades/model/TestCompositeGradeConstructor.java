@@ -1,9 +1,9 @@
 package edu.westga.cs.schoolgrades.model;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -19,6 +19,8 @@ public class TestCompositeGradeConstructor {
 	/**
 	 * Test that constructor throws exception
 	 * for null parameter.
+	 * 
+	 * @throws IllegalArgumentException
 	 */
 	@Test
 	public void tesCannotCreateCompositeGradeWithNullStrategy() {
@@ -28,21 +30,12 @@ public class TestCompositeGradeConstructor {
 	}
 	
 	/**
-	 * Creates a CompositeGrade with SumOfGradesStrategy
-	 * before each test.
-	 * @throws Exception
-	 */
-	@BeforeEach
-	public void setUp() throws Exception {
-		this.compositeGrade = new CompositeGrade(new SumOfGradesStrategy());
-	}
-
-	/**
-	 * Tests that CompositeGrade 
-	 * created with empty list.
+	 * Test that CompositeGrade
+	 * created with empty list
 	 */
 	@Test
-	public void testCompositeGradeConstructorShouldReturnEmptyGradeList() {
-		assertEquals("There are no grades", this.compositeGrade.toString());
+	public void shouldHaveNoGradesWhenCreated() {
+		this.compositeGrade = new CompositeGrade(mock(GradeStrategy.class));
+		assertTrue(this.compositeGrade.getGrades().isEmpty());
 	}
 }

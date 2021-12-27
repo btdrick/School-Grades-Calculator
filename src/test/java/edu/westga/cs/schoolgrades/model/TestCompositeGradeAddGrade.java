@@ -2,95 +2,76 @@ package edu.westga.cs.schoolgrades.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
  * This class tests the functionality of
- * {@link CompositeGrade} addGrade method.
+ * {@link CompositeGrade#addGrade(Grade) addGrade} method.
  * 
  * @author Brandon Drick
  * @version 11/07/2021
  */
 public class TestCompositeGradeAddGrade {
-	private CompositeGrade compositeGrade;
-	private ArrayList<Grade> theGrades;
+	private CompositeGrade composite;
+	private Grade mockGrade0;
+	private Grade mockGrade1;
+	private Grade mockGrade2;
 	
 	/**
-	 * Creates a CompositeGrade with {@link SumOfGradesStrategy}
-	 * before each test.
-	 * @throws Exception
+	 * Sets up the objects used in testing
 	 */
 	@BeforeEach
-	public void setUp() throws Exception {
-		this.compositeGrade = new CompositeGrade(new SumOfGradesStrategy());
-		Grade grade1 = new SimpleGrade(100);
-		Grade grade2 = new SimpleGrade(88);
-		Grade grade3 = new WeightedGrade(grade2, 0.8);
-		this.theGrades = new ArrayList<Grade>(Arrays.asList(grade1, grade2, grade3));
+	public void setup() {
+		this.composite = new CompositeGrade(mock(GradeStrategy.class));
+		this.mockGrade0 = mock(Grade.class);
+		when(this.mockGrade0.getValue()).thenReturn(10.00);
+		this.mockGrade1 = mock(Grade.class);
+		when(this.mockGrade1.getValue()).thenReturn(20.00);
+		this.mockGrade2 = mock(Grade.class);
+		when(this.mockGrade2.getValue()).thenReturn(30.00);
 	}
 	
 	/**
-	 * Test that a null Grade cannot be added.
+	 * Tests cannot add null Grade object.
+	 * 
+	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testCannotAddNullGrade() {
-		assertThrows(IllegalArgumentException.class, () -> {
-			this.compositeGrade.addGrade(null);
+	public void shouldNotAddNullGrade() {
+		assertThrows(IllegalArgumentException.class, () -> { 
+			this.composite.addGrade(null);
 		});
 	}
-
+	
 	/**
-	 * Tests that CompositeGrade 
-	 * adds a new {@link SimpleGrade}.
+	 * Test can add one Grade object.
 	 */
 	@Test
-	public void testCompositeGradeConstructorShouldReturnEmptyGradeList() {
-		assertEquals("There are no grades", this.compositeGrade.toString());
+	public void canAddOneGrade() {
+		this.composite.addGrade(this.mockGrade0);
+		List<Grade> grades = this.composite.getGrades();
+		assertEquals(1, grades.size());
+		assertEquals(this.mockGrade0, grades.get(0));
 	}
 	
 	/**
-	 * Tests that a SimpleGrade
-	 * can be added.
+	 * Test can add multiple Grade objects.
 	 */
 	@Test
-	public void testAddSimpleGradeShouldAddGradeOf100() {
-		this.compositeGrade.addGrade(this.theGrades.get(0));
-		ArrayList<Grade> grades = this.compositeGrade.getGrades();
-		assertEquals(this.theGrades.get(0), grades.get(0));
-	}
-	
-	/**
-	 * Tests that multiple Grade objects
-	 * can be added.
-	 */
-	@Test
-	public void testAddMultipleGradesShouldContain3() {
-		for (int index = 0; index < 3; index++) {
-			this.compositeGrade.addGrade(this.theGrades.get(index));
-		}
-		ArrayList<Grade> grades = this.compositeGrade.getGrades();
+	public void canAddManyGrades() {
+		this.composite.addGrade(this.mockGrade0);
+		this.composite.addGrade(this.mockGrade1);
+		this.composite.addGrade(this.mockGrade2);
+		List<Grade> grades = this.composite.getGrades();
 		assertEquals(3, grades.size());
-		for (int index = 0; index < 3; index++) {
-			assertEquals(this.theGrades.get(index), grades.get(index));
-		}
-	}
-	
-	/**
-	 * Tests that a Grade can be 
-	 * added to an index.
-	 */
-	@Test
-	public void testAddGradeToIndexShouldReturnSameGradeForIndex1() {
-		this.compositeGrade.addGrade(this.theGrades.get(0));
-		this.compositeGrade.addGrade(this.theGrades.get(1), 1);
-		ArrayList<Grade> grades = this.compositeGrade.getGrades();
-		for (int index = 0; index < 2; index++) {
-			assertEquals(this.theGrades.get(index), grades.get(index));
-		}
+		assertEquals(this.mockGrade0, grades.get(0));
+		assertEquals(this.mockGrade1, grades.get(1));
+		assertEquals(this.mockGrade2, grades.get(2));
 	}
 }

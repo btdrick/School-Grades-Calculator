@@ -20,6 +20,7 @@ public class TestSimpleGradeSetValue {
 	/**
 	 * Creates a SimpleGrade holding value of 100
 	 * before each test.
+	 * 
 	 * @throws Exception
 	 */
 	@BeforeEach
@@ -30,6 +31,8 @@ public class TestSimpleGradeSetValue {
 	/**
 	 * Tests that a grade value cannot
 	 * be set to a negative number.
+	 * 
+	 * @throws IllegalArgumentException
 	 */
 	@Test
 	public void testCannotSetValueToNegativeNumber() {
