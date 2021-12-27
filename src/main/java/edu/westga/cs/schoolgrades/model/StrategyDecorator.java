@@ -1,6 +1,6 @@
 package edu.westga.cs.schoolgrades.model;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This decorator serves to adjust the output of
@@ -45,7 +45,7 @@ private GradeStrategy gradingStrategy;
 	}
 	
 	@Override
-	public double calculateGrade(ArrayList<Grade> gradeList) {
+	public double calculateGrade(List<Grade> gradeList) {
 		if (gradeList == null) {
 			throw new IllegalArgumentException("Grade list cannot be null");
 		}

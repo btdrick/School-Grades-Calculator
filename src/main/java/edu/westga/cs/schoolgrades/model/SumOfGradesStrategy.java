@@ -1,6 +1,6 @@
 package edu.westga.cs.schoolgrades.model;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This GradeStrategy calculates the
@@ -15,7 +15,7 @@ public class SumOfGradesStrategy implements GradeStrategy {
 	 * Calculates the sum of the grade list.
 	 */
 	@Override
-	public double calculateGrade(ArrayList<Grade> gradeList) {
+	public double calculateGrade(List<Grade> gradeList) {
 		if (gradeList == null) {
 			throw new IllegalArgumentException("Grade list cannot be null");
 		}

@@ -1,6 +1,7 @@
 package edu.westga.cs.schoolgrades.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class calculates with a {@link GradeStrategy}
@@ -20,7 +21,7 @@ public class GradeDropperLowestGrade extends StrategyDecorator {
 	}
 
 	@Override
-	public double calculateGrade(ArrayList<Grade> grades) {
+	public double calculateGrade(List<Grade> grades) {
 		if (grades == null) {
 			throw new IllegalArgumentException("grades may not be null");
 		}
@@ -29,18 +30,19 @@ public class GradeDropperLowestGrade extends StrategyDecorator {
 			return super.calculateGrade(grades);
 		}
 		
-		ArrayList<Grade> withLowestRemoved = this.dropLowestFrom(grades);
+		List<Grade> withLowestRemoved = this.dropLowestFrom(grades);
 		return super.calculateGrade(withLowestRemoved);
 	} 
 
-	private ArrayList<Grade> dropLowestFrom(ArrayList<Grade> grades) {
+	private List<Grade> dropLowestFrom(List<Grade> grades) {
 		Grade lowest = grades.get(0);
 		for (Grade grade: grades) {
 			if (lowest.getValue() > grade.getValue()) {
 				lowest = grade;
 			}
 		}
-		ArrayList<Grade> result = new ArrayList<Grade>(grades);
+		
+		List<Grade> result = new ArrayList<Grade>(grades);
 		result.remove(lowest);
 		return result;
 	}
