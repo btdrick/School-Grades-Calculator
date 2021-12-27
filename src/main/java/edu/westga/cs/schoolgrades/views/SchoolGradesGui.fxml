@@ -1,7 +1,129 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs.schoolgrades.controllers.SchoolGradesController">
+   <children>
+      <GridPane prefHeight="350.0" prefWidth="450.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="81.8000244140625" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="260.7999755859375" minHeight="10.0" prefHeight="238.40001220703124" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="97.60001220703128" minHeight="10.0" prefHeight="39.199987792968784" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <MenuBar fx:id="menuBar" GridPane.columnSpan="3" GridPane.valignment="TOP">
+              <menus>
+                  <Menu fx:id="fileMenu" mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem fx:id="exit" mnemonicParsing="false" text="Exit" />
+                      	<MenuItem fx:id="clearQuizzes" mnemonicParsing="false" text="Clear quizzes" />
+                        <MenuItem fx:id="clearHomeworks" mnemonicParsing="false" text="Clear homeworks" />
+                        <MenuItem fx:id="clearExams" mnemonicParsing="false" text="Clear Exams" />
+                        <MenuItem fx:id="clearAll" mnemonicParsing="false" text="Clear all" />
+                    </items>
+                  </Menu>
+                <Menu fx:id="dataMenu" mnemonicParsing="false" text="Data">
+                  <items>
+                    <MenuItem fx:id="addQuiz" mnemonicParsing="false" text="Add quiz" />
+                        <MenuItem fx:id="addHomework" mnemonicParsing="false" text="Add homework" />
+                        <MenuItem fx:id="addExam" mnemonicParsing="false" text="Add exam" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+            <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnSpan="3" GridPane.rowIndex="1">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="125.0" spacing="5.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quizzes" />
+                        <ListView fx:id="quizListView" editable="true" prefHeight="200.0" prefWidth="200.0">
+                           <contextMenu>
+                              <ContextMenu fx:id="quizContextMenu">
+                                <items>
+                                  <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+                                </items>
+                              </ContextMenu>
+                           </contextMenu></ListView>
+                        <Text fx:id="test" strokeType="OUTSIDE" strokeWidth="0.0" text="Quiz Subtotal" />
+                        <TextField fx:id="quizSubtotal" editable="false" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="125.0" spacing="5.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Homeworks" />
+                        <ListView fx:id="homeworkListView" editable="true" prefHeight="200.0" prefWidth="200.0">
+                           <contextMenu>
+                              <ContextMenu fx:id="homeworkContextMenu">
+                                <items>
+                                  <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+                                </items>
+                              </ContextMenu>
+                           </contextMenu></ListView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="HW Subtotal" />
+                        <TextField fx:id="homeworkSubtotal" editable="false" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="125.0" spacing="5.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Exams" />
+                        <ListView fx:id="examListView" editable="true" prefHeight="200.0" prefWidth="200.0">
+                           <contextMenu>
+                              <ContextMenu fx:id="examContextMenu">
+                                <items>
+                                  <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+                                </items>
+                              </ContextMenu>
+                           </contextMenu></ListView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Exam Subtotal" />
+                        <TextField fx:id="examSubtotal" editable="false" />
+                     </children>
+                  </VBox>
+               </children>
+               <GridPane.margin>
+                  <Insets top="10.0" />
+               </GridPane.margin>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="31.0" prefWidth="500.0" spacing="10.0" GridPane.columnSpan="3" GridPane.rowIndex="2">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Final Grade:" />
+                  <TextField fx:id="finalGradeTotal" editable="false" prefWidth="200.0">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </TextField>
+                  <Button fx:id="recalculateButton" mnemonicParsing="false" prefWidth="100.0" text="Recalculate">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </HBox>
+         </children>
+      </GridPane>
+   </children>
 </AnchorPane>
-
