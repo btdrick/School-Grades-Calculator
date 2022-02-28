@@ -1,6 +1,6 @@
 package edu.westga.cs.schoolgrades.model;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This strategy pattern interface
@@ -17,5 +17,5 @@ public interface GradeStrategy {
 	 * @return the calculated grade
 	 * @param gradeList as Grade ArrayList
 	 */
-	double calculateGrade(ArrayList<Grade> gradeList);
+	double calculateGrade(List<Grade> gradeList);
 }

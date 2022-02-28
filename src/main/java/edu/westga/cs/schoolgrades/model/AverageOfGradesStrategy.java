@@ -1,6 +1,6 @@
 package edu.westga.cs.schoolgrades.model;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Strategy for averaging a list of {@link Grade} objects.
@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 public class AverageOfGradesStrategy extends SumOfGradesStrategy {
 	@Override
-	public double calculateGrade(ArrayList<Grade> gradeList) {
+	public double calculateGrade(List<Grade> gradeList) {
 		if (gradeList == null) {
 			throw new IllegalArgumentException("Grades ArrayList can not be null");
 		}
